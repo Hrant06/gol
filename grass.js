@@ -1,7 +1,8 @@
-class LivingCreature {
+class Grass {
     constructor(x, y, ) {
         this.x = x;
         this.y = y;
+        this.multiplay = 0;
         this.directions = [
             [this.x - 1, this.y - 1],
             [this.x, this.y - 1],
@@ -12,6 +13,7 @@ class LivingCreature {
             [this.x, this.y + 1],
             [this.x + 1, this.y + 1]
         ];
+
     }
     chooseCell(character) {
         var found = [];
@@ -28,4 +30,23 @@ class LivingCreature {
         }
         return found;
     }
+
+    mul() {
+        this.multiplay++;
+        var emptyCells = this.chooseCell(0);
+        var newCell = random(emptyCells);
+
+        console.log(emptyCells);
+        if (newCell && this.multiplay >= 5) {
+            var newX = newCell[0];
+            var newY = newCell[1];
+            matrix[newY][newX] = 1;
+
+            var newGrass = new Grass(newX, newY, 1);
+            grassArr.push(newGrass);
+            this.multiplay = 0;
+        }
+    }
+
+
 }

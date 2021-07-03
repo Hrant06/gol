@@ -9,7 +9,7 @@
 //     }
 // }
 
-function generator(matLen, gr, grEat,pre,d,q) {
+function generator(matLen, gr, grEat, pre, d, q) {
     let matrix = [];
     for (let i = 0; i < matLen; i++) {
         matrix[i] = [];
@@ -30,7 +30,7 @@ function generator(matLen, gr, grEat,pre,d,q) {
         if (matrix[x][y] == 0) {
             matrix[x][y] = 2;
         }
-    }for (let i = 0; i < pre; i++) {
+    } for (let i = 0; i < pre; i++) {
         let x = Math.floor(Math.random() * matLen);
         let y = Math.floor(Math.random() * matLen);
         if (matrix[x][y] == 0) {
@@ -43,20 +43,20 @@ function generator(matLen, gr, grEat,pre,d,q) {
         if (matrix[x][y] == 0) {
             matrix[x][y] = 4;
         }
-    }for (let i = 0; i < q; i++) {
+    } for (let i = 0; i < q; i++) {
         let x = Math.floor(Math.random() * matLen);
         let y = Math.floor(Math.random() * matLen);
         if (matrix[x][y] == 0) {
             matrix[x][y] = 5;
         }
     }
-    
+
     return matrix;
 }
 
 let side = 20;
 
-let matrix = generator(30, 250, 80,35,50,40);
+let matrix = generator(30, 250, 80, 35, 50, 40);
 
 var grassArr = []
 var grassEaterArr = []
@@ -94,7 +94,7 @@ function setup() {
                 qarArr.push(qar)
             }
         }
-    } 
+    }
 }
 
 function draw() {
@@ -141,7 +141,7 @@ function draw() {
     for (var i in didArr) {
         didArr[i].die()
     }
-    
+
 }
 
 
