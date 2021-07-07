@@ -1,0 +1,3 @@
+class Bust extends LivingCreature {
+
+}

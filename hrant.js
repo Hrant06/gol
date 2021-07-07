@@ -9,7 +9,7 @@
 //     }
 // }
 
-function generator(matLen, gr, grEat, pre, d, q) {
+function generator(matLen, gr, grEat, pre, d, q,bust) {
     let matrix = [];
     for (let i = 0; i < matLen; i++) {
         matrix[i] = [];
@@ -49,6 +49,12 @@ function generator(matLen, gr, grEat, pre, d, q) {
         if (matrix[x][y] == 0) {
             matrix[x][y] = 5;
         }
+    }for (let i = 0; i < bust; i++) {
+        let x = Math.floor(Math.random() * matLen);
+        let y = Math.floor(Math.random() * matLen);
+        if (matrix[x][y] == 0) {
+            matrix[x][y] = 5;
+        }
     }
 
     return matrix;
@@ -56,13 +62,14 @@ function generator(matLen, gr, grEat, pre, d, q) {
 
 let side = 20;
 
-let matrix = generator(30, 250, 80, 35, 50, 40);
+let matrix = generator(30, 250, 80, 35, 50, 40,30);
 
 var grassArr = []
 var grassEaterArr = []
 var predatorArr = []
 var didArr = []
 var qarArr = []
+var bustArr = []
 
 function setup() {
     frameRate(5);
@@ -92,6 +99,9 @@ function setup() {
             else if (matrix[y][x] == 5) {
                 var qar = new Qar(x, y)
                 qarArr.push(qar)
+            }else if (matrix[y][x] == 6) {
+                var bust = new Bust(x, y)
+                bustArr.push(bust)
             }
         }
     }
@@ -122,6 +132,9 @@ function draw() {
             }
             else if (matrix[y][x] == 5) {
                 fill("black");
+                rect(x * side, y * side, side, side);
+            }else if (matrix[y][x] == 6) {
+                fill("aqua");
                 rect(x * side, y * side, side, side);
             }
         }

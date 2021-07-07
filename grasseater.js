@@ -1,6 +1,6 @@
-class GrassEater extends LivingCreature{
+class GrassEater extends LivingCreature {
     constructor(x, y) {
-        super.constructor(x,y)
+        super(x, y)
         this.energy = 8;
         this.multiply = 0
     }

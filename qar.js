@@ -1,10 +1,10 @@
 
-class Qar extends LivingCreature{
-    constructor(x,y) {
-       super(x,y)
+class Qar extends LivingCreature {
+    constructor(x, y) {
+        super(x, y)
         this.energy = 10;
         this.multiply = 0
-       }
+    }
 
     getNewCoordinates() {
         this.directions = [
@@ -18,6 +18,6 @@ class Qar extends LivingCreature{
             [this.x + 1, this.y + 1]
         ];
     }
- 
+
 }
- 
+
