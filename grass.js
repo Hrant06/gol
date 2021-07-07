@@ -1,5 +1,5 @@
 class Grass extends LivingCreature {
-    constructor(x, y, ) {
+    constructor(x, y,) {
         super(x, y)
         this.multiplay = 0;
 
