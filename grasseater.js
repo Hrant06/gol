@@ -66,6 +66,8 @@ class GrassEater extends LivingCreature {
         var newCell = emptyCells[Math.floor(Math.random() * emptyCells.length)]
         var emptyCells1 = this.chooseCell(4)
         var newCell1 = emptyCells1[Math.floor(Math.random() * emptyCells.length)]
+        var emptyCells2 = this.chooseCell(4)
+        var newCell2 = emptyCells2[Math.floor(Math.random() * emptyCells.length)]
 
         if (newCell) {
             this.energy++
@@ -85,6 +87,23 @@ class GrassEater extends LivingCreature {
         } else if (newCell1) {
             {
                 this.energy -= 50
+                var newX = newCell1[0]
+                var newY = newCell1[1]
+
+                matrix[newY][newX] = matrix[this.y][this.x]
+                matrix[this.y][this.x] = 0
+                this.x = newX
+                this.y = newY
+                for (var i in didArr) {
+                    if (newX == didArr[i].x && newY == didArr[i].y) {
+                        didArr.splice(i, 1)
+                        break
+                    }
+                }
+            }
+        }else if (newCell2) {
+            {
+                this.energy += 5
                 var newX = newCell1[0]
                 var newY = newCell1[1]
 

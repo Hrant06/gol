@@ -53,7 +53,7 @@ function generator(matLen, gr, grEat, pre, d, q,bust) {
         let x = Math.floor(Math.random() * matLen);
         let y = Math.floor(Math.random() * matLen);
         if (matrix[x][y] == 0) {
-            matrix[x][y] = 5;
+            matrix[x][y] = 6;
         }
     }
 
@@ -62,7 +62,7 @@ function generator(matLen, gr, grEat, pre, d, q,bust) {
 
 let side = 20;
 
-let matrix = generator(30, 250, 80, 35, 50, 40,30);
+let matrix = generator(30, 250, 80, 35, 50, 40,0);
 
 var grassArr = []
 var grassEaterArr = []
@@ -153,6 +153,9 @@ function draw() {
     }
     for (var i in didArr) {
         didArr[i].die()
+    }
+    for (var i in bustArr) {
+        bustArr[i].die()
     }
 
 }
