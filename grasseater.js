@@ -28,14 +28,13 @@ class GrassEater extends LivingCreature {
         var emptyCells = this.chooseCell(0);
         var newCell = random(emptyCells);
 
-        console.log(emptyCells);
         if (newCell && this.multiply >= 10) {
             var newX = newCell[0];
             var newY = newCell[1];
             matrix[newY][newX] = 2;
 
             var newGrass = new GrassEater(newX, newY);
-            grassEaterArr.push(newGrass);
+            grassEaterArr.push(newG rass);
             this.multiply = 0;
         }
     }
@@ -65,9 +64,11 @@ class GrassEater extends LivingCreature {
         var emptyCells = this.chooseCell(1)
         var newCell = emptyCells[Math.floor(Math.random() * emptyCells.length)]
         var emptyCells1 = this.chooseCell(4)
-        var newCell1 = emptyCells1[Math.floor(Math.random() * emptyCells.length)]
-        var emptyCells2 = this.chooseCell(4)
-        var newCell2 = emptyCells2[Math.floor(Math.random() * emptyCells.length)]
+        var newCell1 = emptyCells1[Math.floor(Math.random() * emptyCells1.length)]
+        var emptyCells2 = this.chooseCell(6)
+        var newCell2 = emptyCells2[Math.floor(Math.random() * emptyCells2.length)]
+        var emptyCells3 = this.chooseCell(7)
+        var newCell3 = emptyCells3[Math.floor(Math.random() * emptyCells3.length)]
 
         if (newCell) {
             this.energy++
@@ -86,7 +87,7 @@ class GrassEater extends LivingCreature {
             }
         } else if (newCell1) {
             {
-                this.energy -= 50
+                
                 var newX = newCell1[0]
                 var newY = newCell1[1]
 
@@ -100,24 +101,40 @@ class GrassEater extends LivingCreature {
                         break
                     }
                 }
+                this.die();
             }
         }else if (newCell2) {
             {
                 this.energy += 5
-                var newX = newCell1[0]
-                var newY = newCell1[1]
+                var newX = newCell2[0]
+                var newY = newCell2[1]
 
                 matrix[newY][newX] = matrix[this.y][this.x]
                 matrix[this.y][this.x] = 0
                 this.x = newX
                 this.y = newY
-                for (var i in didArr) {
-                    if (newX == didArr[i].x && newY == didArr[i].y) {
-                        didArr.splice(i, 1)
+                for (var i in bustArr) {
+                    if (newX == bustArr[i].x && newY == bustArr[i].y) {
+                        bustArr.splice(i, 1)
                         break
                     }
                 }
             }
+        }else if (newCell3) {
+            var newX = newCell3[0]
+            var newY = newCell3[1]
+            
+            matrix[newY][newX] = matrix[this.y][this.x]
+            matrix[this.y][this.x] = 0
+            this.x = newX
+            this.y = newY
+            for (var i in grassArr) {
+                if (newX == grassArr[i].x && newY == grassArr[i].y) {
+                    grassArr.splice(i, 1)
+                    break
+                }
+            }
+            this.die()
         }
         else {
             this.move()

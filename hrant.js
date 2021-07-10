@@ -9,7 +9,7 @@
 //     }
 // }
 
-function generator(matLen, gr, grEat, pre, d, q,bust) {
+function generator(matLen, gr, grEat, pre, d, q,bust,xot) {
     let matrix = [];
     for (let i = 0; i < matLen; i++) {
         matrix[i] = [];
@@ -55,6 +55,12 @@ function generator(matLen, gr, grEat, pre, d, q,bust) {
         if (matrix[x][y] == 0) {
             matrix[x][y] = 6;
         }
+    }for (let i = 0; i < xot; i++) {
+        let x = Math.floor(Math.random() * matLen);
+        let y = Math.floor(Math.random() * matLen);
+        if (matrix[x][y] == 0) {
+            matrix[x][y] = 7;
+        }
     }
 
     return matrix;
@@ -62,7 +68,10 @@ function generator(matLen, gr, grEat, pre, d, q,bust) {
 
 let side = 20;
 
-let matrix = generator(30, 250, 80, 35, 50, 40,0);
+let matrix = generator(30, 250, 200, 35, 50, 40,30,60);
+// let matrix = generator(30, 0, 1, 0, 0, 0,0,1000);
+
+
 
 var grassArr = []
 var grassEaterArr = []
@@ -70,6 +79,7 @@ var predatorArr = []
 var didArr = []
 var qarArr = []
 var bustArr = []
+var xotArr = []
 
 function setup() {
     frameRate(5);
@@ -102,6 +112,9 @@ function setup() {
             }else if (matrix[y][x] == 6) {
                 var bust = new Bust(x, y)
                 bustArr.push(bust)
+            }else if (matrix[y][x] == 7) {
+                var xot = new Xot(x, y)
+                xotArr.push(xot)
             }
         }
     }
@@ -134,7 +147,10 @@ function draw() {
                 fill("black");
                 rect(x * side, y * side, side, side);
             }else if (matrix[y][x] == 6) {
-                fill("aqua");
+                fill("white");
+                rect(x * side, y * side, side, side);
+            }else if (matrix[y][x] == 7) {
+                fill("lime");
                 rect(x * side, y * side, side, side);
             }
         }
@@ -156,6 +172,8 @@ function draw() {
     }
     for (var i in bustArr) {
         bustArr[i].die()
+    }for (var i in xotArr) {
+        xotArr[i].mul()
     }
 
 }
