@@ -1,4 +1,6 @@
-class Xot extends LivingCreature {
+let LivingCreature = require('./class.js')
+
+module.exports = class Xot extends LivingCreature {
     constructor(x, y,) {
         super(x, y)
         this.multiplay = 0;
@@ -9,9 +11,9 @@ class Xot extends LivingCreature {
     mul() {
         this.multiplay++;
         var emptyCells = this.chooseCell(0);
-        var newCell = random(emptyCells);
+        var newCell = emptyCells[Math.floor(Math.random() * emptyCells.length)];
 
-        // console.log(emptyCells);
+       
         if (newCell && this.multiplay >= 5) {
             var newX = newCell[0];
             var newY = newCell[1];

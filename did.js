@@ -1,4 +1,6 @@
-class Did extends LivingCreature {
+let LivingCreature = require('./class.js')
+
+module.exports = class Did extends LivingCreature {
     constructor(x, y, ) {
        super(x,y)
         this.multiplay = 0;

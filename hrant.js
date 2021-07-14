@@ -9,6 +9,8 @@
 //     }
 // }
 
+var socket = io();
+
 function generator(matLen, gr, grEat, pre, d, q,bust,xot) {
     let matrix = [];
     for (let i = 0; i < matLen; i++) {
@@ -81,101 +83,59 @@ var qarArr = []
 var bustArr = []
 var xotArr = []
 
+
+
 function setup() {
-    frameRate(5);
-    createCanvas(matrix[0].length * side, matrix.length * side);
+    // frameRate(5);
+    createCanvas(30 * side, 30 * side);
     background('#acacac');
 
 
 
-    for (var y = 0; y < matrix.length; y++) {
-        for (var x = 0; x < matrix[y].length; x++) {
-
-            if (matrix[y][x] == 1) {
-                var gr = new Grass(x, y);
-                grassArr.push(gr)
-            } else if (matrix[y][x] == 2) {
-                var grEat = new GrassEater(x, y)
-                grassEaterArr.push(grEat)
-            }
-            else if (matrix[y][x] == 3) {
-                var predat = new Predator(x, y)
-                predatorArr.push(predat)
-            }
-            else if (matrix[y][x] == 4) {
-                var did = new Did(x, y)
-                didArr.push(did)
-            }
-            else if (matrix[y][x] == 5) {
-                var qar = new Qar(x, y)
-                qarArr.push(qar)
-            }else if (matrix[y][x] == 6) {
-                var bust = new Bust(x, y)
-                bustArr.push(bust)
-            }else if (matrix[y][x] == 7) {
-                var xot = new Xot(x, y)
-                xotArr.push(xot)
-            }
-        }
-    }
 }
-
-function draw() {
+function nkarel() {
+ 
 
     for (var y = 0; y < matrix.length; y++) {
         for (var x = 0; x < matrix[y].length; x++) {
+            var obj = matrix[y][x]
 
-            if (matrix[y][x] == 1) {
+            if (obj == 1) {
                 fill("green");
                 rect(x * side, y * side, side, side);
             }
-            else if (matrix[y][x] == 2) {
+            else if (obj == 2) {
                 fill("yellow");
                 rect(x * side, y * side, side, side);
-            } else if (matrix[y][x] == 0) {
+            } else if (obj == 0) {
                 fill("#acacac");
                 rect(x * side, y * side, side, side);
-            } else if (matrix[y][x] == 3) {
+            } else if (obj == 3) {
                 fill("blue");
                 rect(x * side, y * side, side, side);
             }
-            else if (matrix[y][x] == 4) {
+            else if (obj == 4) {
                 fill("red");
                 rect(x * side, y * side, side, side);
             }
-            else if (matrix[y][x] == 5) {
+            else if (obj== 5) {
                 fill("black");
                 rect(x * side, y * side, side, side);
-            }else if (matrix[y][x] == 6) {
+            }else if (obj == 6) {
                 fill("white");
                 rect(x * side, y * side, side, side);
-            }else if (matrix[y][x] == 7) {
+            }else if (obj == 7) {
                 fill("lime");
                 rect(x * side, y * side, side, side);
             }
         }
     }
-    for (var i in grassArr) {
-        grassArr[i].mul();
-
-    }
-    for (var i in grassEaterArr) {
-        grassEaterArr[i].mul();
-        grassEaterArr[i].eat();
-    }
-    for (var i in predatorArr) {
-        predatorArr[i].mul();
-        predatorArr[i].eat();
-    }
-    for (var i in didArr) {
-        didArr[i].die()
-    }
-    for (var i in bustArr) {
-        bustArr[i].die()
-    }for (var i in xotArr) {
-        xotArr[i].mul()
-    }
-
 }
 
+setInterval(
+    function () {
 
+        
+    socket.on('send matrix', nkarel)
+    },1000
+)

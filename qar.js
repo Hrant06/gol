@@ -1,5 +1,6 @@
+let LivingCreature = require('./class.js')
 
-class Qar extends LivingCreature {
+module.exports = class Qar extends LivingCreature {
     constructor(x, y) {
         super(x, y)
         this.energy = 10;

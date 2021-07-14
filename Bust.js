@@ -1,4 +1,6 @@
-class Bust extends LivingCreature {
+let LivingCreature = require('./class.js')
+
+module.exports = class Bust extends LivingCreature {
     constructor(x, y, ) {
         super(x,y)
          this.multiplay = 0;
