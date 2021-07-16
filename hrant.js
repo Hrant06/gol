@@ -11,78 +11,11 @@
 
 var socket = io();
 
-function generator(matLen, gr, grEat, pre, d, q,bust,xot) {
-    let matrix = [];
-    for (let i = 0; i < matLen; i++) {
-        matrix[i] = [];
-        for (let j = 0; j < matLen; j++) {
-            matrix[i][j] = 0;
-        }
-    }
-    for (let i = 0; i < gr; i++) {
-        let x = Math.floor(Math.random() * matLen);
-        let y = Math.floor(Math.random() * matLen);
-        if (matrix[x][y] == 0) {
-            matrix[x][y] = 1;
-        }
-    }
-    for (let i = 0; i < grEat; i++) {
-        let x = Math.floor(Math.random() * matLen);
-        let y = Math.floor(Math.random() * matLen);
-        if (matrix[x][y] == 0) {
-            matrix[x][y] = 2;
-        }
-    } for (let i = 0; i < pre; i++) {
-        let x = Math.floor(Math.random() * matLen);
-        let y = Math.floor(Math.random() * matLen);
-        if (matrix[x][y] == 0) {
-            matrix[x][y] = 3;
-        }
-    }
-    for (let i = 0; i < d; i++) {
-        let x = Math.floor(Math.random() * matLen);
-        let y = Math.floor(Math.random() * matLen);
-        if (matrix[x][y] == 0) {
-            matrix[x][y] = 4;
-        }
-    } for (let i = 0; i < q; i++) {
-        let x = Math.floor(Math.random() * matLen);
-        let y = Math.floor(Math.random() * matLen);
-        if (matrix[x][y] == 0) {
-            matrix[x][y] = 5;
-        }
-    }for (let i = 0; i < bust; i++) {
-        let x = Math.floor(Math.random() * matLen);
-        let y = Math.floor(Math.random() * matLen);
-        if (matrix[x][y] == 0) {
-            matrix[x][y] = 6;
-        }
-    }for (let i = 0; i < xot; i++) {
-        let x = Math.floor(Math.random() * matLen);
-        let y = Math.floor(Math.random() * matLen);
-        if (matrix[x][y] == 0) {
-            matrix[x][y] = 7;
-        }
-    }
 
-    return matrix;
-}
 
 let side = 20;
 
-let matrix = generator(30, 250, 200, 35, 50, 40,30,60);
 // let matrix = generator(30, 0, 1, 0, 0, 0,0,1000);
-
-
-
-var grassArr = []
-var grassEaterArr = []
-var predatorArr = []
-var didArr = []
-var qarArr = []
-var bustArr = []
-var xotArr = []
-
 
 
 function setup() {
@@ -93,11 +26,13 @@ function setup() {
 
 
 }
-function nkarel() {
- 
+function narisovat(matrix) {
 
+
+ 
     for (var y = 0; y < matrix.length; y++) {
         for (var x = 0; x < matrix[y].length; x++) {
+
             var obj = matrix[y][x]
 
             if (obj == 1) {
@@ -131,11 +66,12 @@ function nkarel() {
         }
     }
 }
+    setInterval(
+        function () {
+           
+            
+        socket.on('send matrix', narisovat)
+        },1000
+    )
 
-setInterval(
-    function () {
 
-        
-    socket.on('send matrix', nkarel)
-    },1000
-)

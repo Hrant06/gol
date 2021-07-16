@@ -8,7 +8,7 @@ app.use(express.static("."))
 app.get('/', function (req, res) {
     res.redirect('index.html')
 })
-server.listen(8080)
+server.listen(3000)
 
 matrix = []
 
@@ -71,6 +71,7 @@ function createObject(matrix) {
 }
 function generator(matLen, gr, grEat, pre, d, q,bust,xot) {
     let matrix = [];
+
     for (let i = 0; i < matLen; i++) {
         matrix[i] = [];
         for (let j = 0; j < matLen; j++) {
@@ -122,14 +123,17 @@ function generator(matLen, gr, grEat, pre, d, q,bust,xot) {
             matrix[x][y] = 7;
         }
     }
-
     return matrix;
 }
 
 matrix = generator(30, 250, 200, 35, 50, 40,30,60);
+
+
 io.sockets.emit("send matrix", matrix);
 
 function game() {
+    
+   
     for (var i in grassArr) {
         grassArr[i].mul();
 
@@ -155,5 +159,7 @@ function game() {
 setInterval(game, 1000)
 
 io.on('connection', function (socket) {
+    
+    
     createObject(matrix)
 })
