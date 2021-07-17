@@ -20,6 +20,7 @@ qarArr = []
 bustArr = []
 xotArr = []
 
+
 Grass = require("./grass")
 GrassEater = require("./grasseater")
 Predator = require("./predator")
@@ -66,7 +67,12 @@ function createObject(matrix) {
         }
     }
 
-
+    io.sockets.emit('send grass', grassArr)
+    io.sockets.emit('send predator', predatorArr)
+    io.sockets.emit('send grasseater', grassEaterArr)
+    io.sockets.emit('send did', didArr)
+    io.sockets.emit('send bust', bustArr)
+    io.sockets.emit('send xot', xotArr)
     io.sockets.emit('send matrix', matrix)
 }
 function generator(matLen, gr, grEat, pre, d, q,bust,xot) {
@@ -155,11 +161,19 @@ function game() {
         xotArr[i].mul()
     }
     io.sockets.emit("send matrix", matrix);
+    io.sockets.emit('send grass', grassArr)
+    io.sockets.emit('send predator', predatorArr)
+    io.sockets.emit('send grasseater', grassEaterArr)
+    io.sockets.emit('send did', didArr)
+    io.sockets.emit('send bust', bustArr)
+    io.sockets.emit('send xot', xotArr)
 }
-setInterval(game, 1000)
+setInterval(game,500)
 
 io.on('connection', function (socket) {
     
     
     createObject(matrix)
 })
+
+fs.writeFileSync("statistic.txt")

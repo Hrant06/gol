@@ -29,7 +29,7 @@ function setup() {
 function narisovat(matrix) {
 
 
- 
+
     for (var y = 0; y < matrix.length; y++) {
         for (var x = 0; x < matrix[y].length; x++) {
 
@@ -53,25 +53,57 @@ function narisovat(matrix) {
                 fill("red");
                 rect(x * side, y * side, side, side);
             }
-            else if (obj== 5) {
+            else if (obj == 5) {
                 fill("black");
                 rect(x * side, y * side, side, side);
-            }else if (obj == 6) {
+            } else if (obj == 6) {
                 fill("white");
                 rect(x * side, y * side, side, side);
-            }else if (obj == 7) {
+            } else if (obj == 7) {
                 fill("lime");
                 rect(x * side, y * side, side, side);
             }
         }
     }
 }
-    setInterval(
-        function () {
-           
-            
+
+
+
+
+
+
+function logGrass(a) {
+    console.log(a.length)
+}socket.on('send grass', logGrass)
+
+
+function logGrassEater(a) {
+    console.log(a.length)
+}socket.on('send grasseater', logGrassEater)
+
+
+function logPredator(a) {
+    console.log(a.length)
+}socket.on('send predator', logPredator)
+
+
+function logDid(a) {
+    console.log(a.length)
+}socket.on('send did', logDid)
+
+
+function logBust(a) {
+    console.log(a.length)
+}socket.on('send bust', logBust)
+
+
+function logXot(a) {
+    console.log(a.length)
+}socket.on('send xot', logXot)
+
+setInterval(
+    function () {
         socket.on('send matrix', narisovat)
-        },1000
-    )
-
-
+        
+    }, 500
+)
