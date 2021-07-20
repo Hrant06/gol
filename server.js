@@ -8,7 +8,7 @@ app.use(express.static("."))
 app.get('/', function (req, res) {
     res.redirect('index.html')
 })
-server.listen(3000)
+server.listen(8080)
 
 matrix = []
 
@@ -75,7 +75,7 @@ function createObject(matrix) {
     io.sockets.emit('send xot', xotArr)
     io.sockets.emit('send matrix', matrix)
 }
-function generator(matLen, gr, grEat, pre, d, q,bust,xot) {
+function generator(matLen, gr, grEat, pre, d, q, bust, xot) {
     let matrix = [];
 
     for (let i = 0; i < matLen; i++) {
@@ -116,13 +116,13 @@ function generator(matLen, gr, grEat, pre, d, q,bust,xot) {
         if (matrix[x][y] == 0) {
             matrix[x][y] = 5;
         }
-    }for (let i = 0; i < bust; i++) {
+    } for (let i = 0; i < bust; i++) {
         let x = Math.floor(Math.random() * matLen);
         let y = Math.floor(Math.random() * matLen);
         if (matrix[x][y] == 0) {
             matrix[x][y] = 6;
         }
-    }for (let i = 0; i < xot; i++) {
+    } for (let i = 0; i < xot; i++) {
         let x = Math.floor(Math.random() * matLen);
         let y = Math.floor(Math.random() * matLen);
         if (matrix[x][y] == 0) {
@@ -132,14 +132,14 @@ function generator(matLen, gr, grEat, pre, d, q,bust,xot) {
     return matrix;
 }
 
-matrix = generator(30, 250, 200, 35, 50, 40,30,60);
+matrix = generator(30, 250, 200, 35, 50, 40, 30, 60);
 
 
 io.sockets.emit("send matrix", matrix);
 
 function game() {
-    
-   
+
+
     for (var i in grassArr) {
         grassArr[i].mul();
 
@@ -168,12 +168,34 @@ function game() {
     io.sockets.emit('send bust', bustArr)
     io.sockets.emit('send xot', xotArr)
 }
-setInterval(game,500)
+setInterval(game, 500)
+
+let flag = true
+
 
 io.on('connection', function (socket) {
-    
-    
-    createObject(matrix)
+    if (flag) {
+        createObject(matrix)
+        flag = false
+    }
 })
 
-fs.writeFileSync("statistic.txt")
+
+
+
+var statistics = {}
+
+setInterval(function () {
+
+    statistics.grass = grassArr.length
+    statistics.grassEater = grassEaterArr.length
+    statistics.predator = predatorArr.length
+    statistics.did = didArr.length
+    statistics.bust = bustArr.length
+    statistics.xot = xotArr.length
+
+
+
+    fs.writeFileSync("statistic.txt",
+        JSON.stringify(statistics))
+}, 1000)
