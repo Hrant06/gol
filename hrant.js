@@ -26,6 +26,13 @@ function setup() {
 
 
 }
+weather = 'summer'
+
+socket.on('send weather', function (data) {
+    currentWeather = data
+})
+
+
 function narisovat(matrix) {
 
 
@@ -36,7 +43,10 @@ function narisovat(matrix) {
             var obj = matrix[y][x]
 
             if (obj == 1) {
-                fill("green");
+                if (currentWeather == 'summer') fill("#00E605")
+                else if (currentWeather == 'automn') fill("#F5B43A")
+                else if (currentWeather == 'winter') fill("#FFFFFF")
+                else if (currentWeather == 'spring') fill("#DFE366")
                 rect(x * side, y * side, side, side);
             }
             else if (obj == 2) {
@@ -57,10 +67,10 @@ function narisovat(matrix) {
                 fill("black");
                 rect(x * side, y * side, side, side);
             } else if (obj == 6) {
-                fill("white");
+                fill("aqua");
                 rect(x * side, y * side, side, side);
             } else if (obj == 7) {
-                fill("lime");
+                fill("#8BFCA2")
                 rect(x * side, y * side, side, side);
             }
         }
@@ -74,36 +84,36 @@ function narisovat(matrix) {
 
 function logGrass(a) {
     console.log(a.length)
-}socket.on('send grass', logGrass)
+} socket.on('send grass', logGrass)
 
 
 function logGrassEater(a) {
     console.log(a.length)
-}socket.on('send grasseater', logGrassEater)
+} socket.on('send grasseater', logGrassEater)
 
 
 function logPredator(a) {
     console.log(a.length)
-}socket.on('send predator', logPredator)
+} socket.on('send predator', logPredator)
 
 
 function logDid(a) {
     console.log(a.length)
-}socket.on('send did', logDid)
+} socket.on('send did', logDid)
 
 
 function logBust(a) {
     console.log(a.length)
-}socket.on('send bust', logBust)
+} socket.on('send bust', logBust)
 
 
 function logXot(a) {
     console.log(a.length)
-}socket.on('send xot', logXot)
+} socket.on('send xot', logXot)
 
 setInterval(
     function () {
         socket.on('send matrix', narisovat)
-        
+
     }, 500
 )

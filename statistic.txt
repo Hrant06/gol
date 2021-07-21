@@ -1,1 +1,1 @@
-{"grass":85,"grassEater":0,"predator":0,"did":1,"bust":0,"xot":857}
+{"grass":203,"grassEater":76,"predator":15,"did":7,"bust":3,"xot":31}

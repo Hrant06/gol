@@ -132,6 +132,18 @@ function generator(matLen, gr, grEat, pre, d, q, bust, xot) {
     return matrix;
 }
 
+weather = "summer"
+
+setInterval(function () {
+        if(weather == 'summer') weather='automn'
+       else if(weather == 'automn') weather='winter'
+       else if(weather == 'winter') weather='spring'
+       else if(weather == 'spring') weather='summer'
+
+       io.sockets.emit('send weather', weather);
+
+}, 4000)
+
 matrix = generator(30, 250, 200, 35, 50, 40, 30, 60);
 
 
@@ -199,3 +211,4 @@ setInterval(function () {
     fs.writeFileSync("statistic.txt",
         JSON.stringify(statistics))
 }, 1000)
+
