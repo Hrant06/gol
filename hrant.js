@@ -23,10 +23,8 @@ function setup() {
     createCanvas(30 * side, 30 * side);
     background('#acacac');
 
-
-
 }
-weather = 'summer'
+// weather = 'summer'
 
 socket.on('send weather', function (data) {
     currentWeather = data

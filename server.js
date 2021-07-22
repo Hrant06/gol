@@ -208,7 +208,7 @@ setInterval(function () {
 
 
 
-    fs.writeFileSync("statistic.txt",
+    fs.writeFileSync("statistic.json",
         JSON.stringify(statistics))
 }, 1000)
 
