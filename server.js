@@ -186,7 +186,16 @@ let flag = true
 
 
 io.on('connection', function (socket) {
-    if (flag) {
+    
+    socket.on('add grass',function AddGrass() {
+    console.log("es avelacnum em grass");
+    
+    //
+
+    // io.socket.emit("send matrix",matrix)
+
+})
+if (flag) {
         createObject(matrix)
         flag = false
     }
@@ -211,4 +220,5 @@ setInterval(function () {
     fs.writeFileSync("statistic.json",
         JSON.stringify(statistics))
 }, 1000)
+
 

@@ -115,3 +115,9 @@ setInterval(
 
     }, 500
 )
+
+function AddGrass() {
+    socket.emit('add grass')
+    console.log("socket anuma emit");
+
+}
