@@ -36,7 +36,7 @@ function narisovat(matrix) {
 
 
     for (var y = 0; y < matrix.length; y++) {
-        for (var x = 0; x < matrix[y].length; x++) {
+        for (var x = 0; x < matrix.length; x++) {
 
             var obj = matrix[y][x]
 
@@ -109,15 +109,18 @@ function logXot(a) {
     console.log(a.length)
 } socket.on('send xot', logXot)
 
-setInterval(
-    function () {
         socket.on('send matrix', narisovat)
 
-    }, 500
-)
+    
 
-function AddGrass() {
-    socket.emit('add grass')
-    console.log("socket anuma emit");
 
+
+function kill() {
+    socket.emit("kill")
+}
+function addGrass() {
+    socket.emit("add grass")
+}
+function addGrassEater() {
+    socket.emit("add grassEater")
 }

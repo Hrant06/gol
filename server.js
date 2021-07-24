@@ -132,15 +132,56 @@ function generator(matLen, gr, grEat, pre, d, q, bust, xot) {
     return matrix;
 }
 
+function kill() {
+    grassArr = [];
+    grassEaterArr = []
+    predatorArr=[]
+    xotArr=[]
+    qarArr=[]
+    didArr=[]
+    bustArr=[]
+    for (var y = 0; y < matrix.length; y++) {
+        for (var x = 0; x < matrix[y].length; x++) {
+            matrix[y][x] = 0;
+        }
+    }
+    io.sockets.emit("send matrix", matrix);
+}
+
+
+function addGrass() {
+    for (var i = 0; i < 7; i++) {
+    var x = Math.floor(Math.random() * matrix[0].length)
+    var y = Math.floor(Math.random() * matrix.length)
+        if (matrix[y][x] == 0) {
+            matrix[y][x] = 1
+            var gr = new Grass(x, y, 1)
+            grassArr.push(gr)
+        }
+    }
+    io.sockets.emit("send matrix", matrix);
+}
+function addGrassEater() {
+    for (var i = 0; i < 7; i++) {   
+    var x = Math.floor(Math.random() * matrix[0].length)
+    var y = Math.floor(Math.random() * matrix.length)
+        if (matrix[y][x] == 0) {
+            matrix[y][x] = 2
+            grassEaterArr.push(new GrassEater(x, y, 2))
+        }
+    }
+    io.sockets.emit("send matrix", matrix);
+}
+
 weather = "summer"
 
 setInterval(function () {
-        if(weather == 'summer') weather='automn'
-       else if(weather == 'automn') weather='winter'
-       else if(weather == 'winter') weather='spring'
-       else if(weather == 'spring') weather='summer'
+    if (weather == 'summer') weather = 'automn'
+    else if (weather == 'automn') weather = 'winter'
+    else if (weather == 'winter') weather = 'spring'
+    else if (weather == 'spring') weather = 'summer'
 
-       io.sockets.emit('send weather', weather);
+    io.sockets.emit('send weather', weather);
 
 }, 4000)
 
@@ -185,21 +226,6 @@ setInterval(game, 500)
 let flag = true
 
 
-io.on('connection', function (socket) {
-    
-    socket.on('add grass',function AddGrass() {
-    console.log("es avelacnum em grass");
-    
-    //
-
-    // io.socket.emit("send matrix",matrix)
-
-})
-if (flag) {
-        createObject(matrix)
-        flag = false
-    }
-})
 
 
 
@@ -220,5 +246,21 @@ setInterval(function () {
     fs.writeFileSync("statistic.json",
         JSON.stringify(statistics))
 }, 1000)
+
+
+io.on('connection', function (socket) {
+    if (flag) {
+        createObject(matrix)
+        flag = false
+    }
+    socket.on("kill", kill);
+    socket.on("add grass", addGrass);
+    socket.on("add grassEater", addGrassEater);
+
+})
+
+
+
+
 
 
